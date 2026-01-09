@@ -22,12 +22,12 @@ const SidebarLink = ({ href, icon: Icon, children }: { href: string; icon: any; 
 
   return (
     <Link href={href} className={cn(
-      "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
-      isActive 
-        ? "bg-primary/10 text-primary font-medium shadow-sm" 
-        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+      "flex items-center gap-3 px-3 py-3 rounded-none transition-all duration-200 group font-mono text-sm",
+      isActive
+        ? "bg-primary text-primary-foreground border-l-4 border-primary"
+        : "text-muted-foreground hover:bg-accent hover:text-foreground hover:border-l-2 hover:border-muted"
     )}>
-      <Icon className={cn("w-5 h-5 transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+      <Icon className={cn("w-5 h-5 transition-colors", isActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground")} />
       <span>{children}</span>
     </Link>
   );
@@ -41,7 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 border-b bg-card z-50 sticky top-0">
-        <div className="font-display font-bold text-xl text-foreground">
+        <div className="font-pixel text-sm text-foreground">
           Nart <span className="text-primary">automates</span>
         </div>
         <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -54,11 +54,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         "fixed md:sticky md:top-0 inset-0 z-40 w-full md:w-72 bg-card border-r border-border h-[calc(100vh-64px)] md:h-screen flex flex-col transition-transform duration-300 ease-in-out",
         isMobileMenuOpen ? "translate-x-0 mt-16 md:mt-0" : "-translate-x-full md:translate-x-0"
       )}>
-        <div className="hidden md:flex p-8 items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold font-display text-lg">
+        <div className="hidden md:flex p-6 items-center gap-2 border-b border-border">
+          <div className="w-8 h-8 rounded-none bg-primary flex items-center justify-center text-primary-foreground font-pixel text-xs">
             N
           </div>
-          <div className="font-display font-bold text-xl text-foreground">
+          <div className="font-pixel text-sm text-foreground">
             Nart <span className="text-primary">automates</span>
           </div>
         </div>
@@ -75,19 +75,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         <div className="p-4 border-t border-border mt-auto">
-          <div className="flex items-center gap-3 px-4 py-4 mb-2 rounded-xl bg-muted/50">
-            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+          <div className="flex items-center gap-3 px-3 py-3 mb-2 rounded-none bg-accent border border-border">
+            <div className="w-10 h-10 rounded-none bg-primary flex items-center justify-center text-primary-foreground font-pixel text-xs">
               {user?.username?.[0]?.toUpperCase() || "U"}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate text-foreground">{user?.username || "Пользователь"}</p>
-              <p className="text-xs text-muted-foreground truncate">ID: {user?.telegramId}</p>
+              <p className="font-mono text-sm font-medium truncate text-foreground">{user?.username || "Пользователь"}</p>
+              <p className="font-mono text-xs text-muted-foreground truncate">ID: {user?.telegramId}</p>
             </div>
           </div>
-          
-          <button 
+
+          <button
             onClick={() => logout()}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-destructive hover:bg-destructive/10 transition-colors"
+            className="w-full flex items-center gap-3 px-3 py-3 rounded-none text-destructive hover:bg-destructive/10 transition-colors font-mono text-sm"
           >
             <LogOut className="w-5 h-5" />
             <span className="font-medium">Выход</span>
