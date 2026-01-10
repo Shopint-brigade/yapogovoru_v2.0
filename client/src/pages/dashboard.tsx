@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@shared/routes";
 import { useQueryClient } from "@tanstack/react-query";
+import { cn } from "@/lib/utils"
 
 export default function Dashboard() {
   const { agents } = useAgents();
