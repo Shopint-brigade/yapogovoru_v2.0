@@ -95,9 +95,9 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold font-display text-foreground">Главная</h1>
-        <p className="text-muted-foreground">Обзор активности системы и статистика</p>
+      <div className="flex flex-col gap-2 mb-6">
+        <h1 className="font-pixel text-2xl text-foreground uppercase tracking-wider">Главная</h1>
+        <p className="font-mono text-xs text-muted-foreground">Обзор активности системы и статистика</p>
       </div>
 
       {/* Usage Alert */}
@@ -201,99 +201,113 @@ export default function Dashboard() {
           icon={Clock}
           description="Успешно завершенных звонков"
         />
-        <div className={`bg-card rounded-2xl border shadow-sm p-6 ${
-          remainingCalls < 10 ? 'border-red-500 bg-red-50 dark:bg-red-900/10' : 'border-border'
-        }`}>
-          <div className="flex items-center justify-between">
-            <p className={`text-sm font-medium ${remainingCalls < 10 ? 'text-red-600 dark:text-red-400' : 'text-muted-foreground'}`}>
-              Осталось Звонков
-            </p>
-            <TrendingDown className={`w-4 h-4 ${remainingCalls < 10 ? 'text-red-600 dark:text-red-400' : 'text-muted-foreground'}`} />
-          </div>
-          <div className="mt-2">
-            <h3 className={`text-3xl font-bold font-display ${
-              remainingCalls < 10 ? 'text-red-600 dark:text-red-400' : 'text-foreground'
-            }`}>
-              {remainingCalls > 0 ? remainingCalls : 0}
-            </h3>
-            <p className={`text-xs mt-1 ${remainingCalls < 10 ? 'text-red-600/80 dark:text-red-400/80' : 'text-muted-foreground'}`}>
-              из {usageLimit} лимит
-            </p>
-          </div>
-        </div>
+        <StatsCard
+          title="Осталось Звонков"
+          value={remainingCalls > 0 ? remainingCalls : 0}
+          icon={TrendingDown}
+          description={`из ${usageLimit} лимит`}
+          trend={remainingCalls < 10 ? "down" : "neutral"}
+          className={remainingCalls < 10 ? 'border-destructive' : ''}
+        />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
-        <div className="bg-card rounded-2xl border border-border p-6 shadow-sm">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold font-display">Последние Пакеты</h2>
-            <Link href="/batches" className="text-sm font-medium text-primary hover:underline">
-              Все пакеты
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+        {/* Последние Пакеты - Table Style */}
+        <div className="bg-card border-2 border-border p-0">
+          <div className="flex items-center justify-between p-4 border-b-2 border-border bg-accent">
+            <h2 className="font-pixel text-[12px] uppercase text-foreground tracking-wider">Последние Пакеты</h2>
+            <Link href="/batches" className="font-mono text-[10px] text-primary hover:text-primary/80 transition-colors">
+              Все пакеты →
             </Link>
           </div>
-          
+
           {batches.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground border-2 border-dashed border-border rounded-xl">
+            <div className="text-center py-12 text-muted-foreground">
               <PhoneCall className="w-12 h-12 mx-auto mb-3 opacity-20" />
-              <p>Нет активных пакетов</p>
-              <Link href="/batches" className="text-primary hover:underline text-sm mt-2 block">
+              <p className="font-mono text-xs">Нет активных пакетов</p>
+              <Link href="/batches" className="text-primary hover:underline font-mono text-[10px] mt-2 block">
                 Создать новый пакет
               </Link>
             </div>
           ) : (
-            <div className="space-y-4">
-              {batches.slice(0, 5).map(batch => (
-                <div key={batch.id} className="flex items-center justify-between p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                      <PhoneCall className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-foreground">{batch.name}</h4>
-                      <span className="text-xs text-muted-foreground">
-                        {new Date(batch.createdAt!).toLocaleDateString('ru-RU')}
-                      </span>
-                    </div>
-                  </div>
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    batch.status === 'completed' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
-                    batch.status === 'processing' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
-                    'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                  }`}>
-                    {batch.status === 'completed' ? 'Завершен' :
-                     batch.status === 'processing' ? 'В работе' : 'Ожидание'}
-                  </div>
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b-2 border-border bg-background">
+                    <th className="px-4 py-3 text-left font-mono text-[10px] uppercase text-muted-foreground">Название</th>
+                    <th className="px-4 py-3 text-left font-mono text-[10px] uppercase text-muted-foreground">Дата</th>
+                    <th className="px-4 py-3 text-left font-mono text-[10px] uppercase text-muted-foreground">Статус</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {batches.slice(0, 5).map((batch, idx) => (
+                    <tr key={batch.id} className={cn(
+                      "border-b border-border hover:bg-accent transition-colors",
+                      idx === batches.slice(0, 5).length - 1 && "border-b-0"
+                    )}>
+                      <td className="px-4 py-3">
+                        <div className="font-mono text-xs text-foreground">{batch.name}</div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="font-mono text-[10px] text-muted-foreground">
+                          {new Date(batch.createdAt!).toLocaleDateString('ru-RU')}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <button className={cn(
+                          "font-pixel text-[8px] px-3 py-1 border-2 transition-colors",
+                          batch.status === 'completed' && "bg-success text-white border-success",
+                          batch.status === 'processing' && "bg-primary text-primary-foreground border-primary",
+                          batch.status === 'pending' && "bg-muted text-foreground border-border"
+                        )}>
+                          {batch.status === 'completed' ? 'OK' :
+                           batch.status === 'processing' ? 'RUN' : 'WAIT'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
         </div>
 
-        <div className="bg-card rounded-2xl border border-border p-6 shadow-sm">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold font-display">Активные Агенты</h2>
-            <Link href="/agents" className="text-sm font-medium text-primary hover:underline">
-              Все агенты
+        {/* Активные Агенты - Card Style */}
+        <div className="bg-card border-2 border-border p-0">
+          <div className="flex items-center justify-between p-4 border-b-2 border-border bg-accent">
+            <h2 className="font-pixel text-[12px] uppercase text-foreground tracking-wider">Активные Агенты</h2>
+            <Link href="/agents" className="font-mono text-[10px] text-primary hover:text-primary/80 transition-colors">
+              Все агенты →
             </Link>
           </div>
 
           {agents.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground border-2 border-dashed border-border rounded-xl">
+            <div className="text-center py-12 text-muted-foreground">
               <Users className="w-12 h-12 mx-auto mb-3 opacity-20" />
-              <p>Нет подключенных агентов</p>
-              <Link href="/agents" className="text-primary hover:underline text-sm mt-2 block">
+              <p className="font-mono text-xs">Нет подключенных агентов</p>
+              <Link href="/agents" className="text-primary hover:underline font-mono text-[10px] mt-2 block">
                 Добавить агента
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-4">
+            <div className="p-4 space-y-3">
               {agents.slice(0, 4).map(agent => (
-                <div key={agent.id} className="p-4 rounded-xl border border-border bg-card hover:shadow-md transition-all flex items-center justify-between">
-                  <div>
-                    <h4 className="font-medium text-foreground">{agent.name}</h4>
-                    <p className="text-xs text-muted-foreground mt-1">ID: {agent.agentId}</p>
+                <div key={agent.id} className="border-2 border-border p-3 hover:border-primary transition-colors bg-background">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-primary flex items-center justify-center">
+                        <Users className="w-4 h-4 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <h4 className="font-mono text-xs text-foreground font-medium">{agent.name}</h4>
+                        <p className="font-mono text-[10px] text-muted-foreground">ID: {agent.agentId?.slice(0, 8)}...</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-success"></div>
+                      <span className="font-mono text-[10px] text-success">ONLINE</span>
+                    </div>
                   </div>
-                  <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
                 </div>
               ))}
             </div>
