@@ -24,10 +24,15 @@ export default function Dashboard() {
   const [isClaimingBonus, setIsClaimingBonus] = useState(false);
   const [checkingMembership, setCheckingMembership] = useState(false);
 
-  const activeBatches = batches.filter(b => b.status === "processing").length;
+  // Safe data handling with defaults
+  const safeAgents = agents || [];
+  const safeBatches = batches || [];
+  const safeCalls = calls || [];
+
+  const activeBatches = safeBatches.filter(b => b?.status === "processing").length;
 
   const usageLimit = user?.usage || 0;
-  const currentCalls = calls.length;
+  const currentCalls = safeCalls.length;
   const remainingCalls = usageLimit - currentCalls;
   const isLowOnCalls = remainingCalls < 10 && remainingCalls >= 0;
   const isOutOfCalls = remainingCalls <= 0;
@@ -178,13 +183,13 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         <StatsCard
           title="Всего Агентов"
-          value={agents.length}
+          value={safeAgents.length}
           icon={Users}
           description="Активные ElevenLabs агенты"
         />
         <StatsCard
           title="Пакеты Звонков"
-          value={batches.length}
+          value={safeBatches.length}
           icon={PhoneCall}
           description="Загруженные CSV файлы"
         />
@@ -197,7 +202,7 @@ export default function Dashboard() {
         />
         <StatsCard
           title="Завершенные Звонки"
-          value={completedCalls}
+          value={completedCalls || 0}
           icon={Clock}
           description="Успешно завершенных звонков"
         />
@@ -221,7 +226,7 @@ export default function Dashboard() {
             </Link>
           </div>
 
-          {batches.length === 0 ? (
+          {safeBatches.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               <PhoneCall className="w-12 h-12 mx-auto mb-3 opacity-20" />
               <p className="font-mono text-xs">Нет активных пакетов</p>
@@ -240,28 +245,28 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {batches.slice(0, 5).map((batch, idx) => (
-                    <tr key={batch.id} className={cn(
+                  {safeBatches.slice(0, 5).map((batch, idx) => (
+                    <tr key={batch?.id || idx} className={cn(
                       "border-b border-border hover:bg-accent transition-colors",
-                      idx === batches.slice(0, 5).length - 1 && "border-b-0"
+                      idx === safeBatches.slice(0, 5).length - 1 && "border-b-0"
                     )}>
                       <td className="px-4 py-3">
-                        <div className="font-mono text-xs text-foreground">{batch.name}</div>
+                        <div className="font-mono text-xs text-foreground">{batch?.name || 'Без названия'}</div>
                       </td>
                       <td className="px-4 py-3">
                         <span className="font-mono text-[10px] text-muted-foreground">
-                          {new Date(batch.createdAt!).toLocaleDateString('ru-RU')}
+                          {batch?.createdAt ? new Date(batch.createdAt).toLocaleDateString('ru-RU') : '—'}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         <button className={cn(
                           "font-pixel text-[8px] px-3 py-1 border-2 transition-colors",
-                          batch.status === 'completed' && "bg-success text-white border-success",
-                          batch.status === 'processing' && "bg-primary text-primary-foreground border-primary",
-                          batch.status === 'pending' && "bg-muted text-foreground border-border"
+                          batch?.status === 'completed' && "bg-success text-white border-success",
+                          batch?.status === 'processing' && "bg-primary text-primary-foreground border-primary",
+                          batch?.status === 'pending' && "bg-muted text-foreground border-border"
                         )}>
-                          {batch.status === 'completed' ? 'OK' :
-                           batch.status === 'processing' ? 'RUN' : 'WAIT'}
+                          {batch?.status === 'completed' ? 'OK' :
+                           batch?.status === 'processing' ? 'RUN' : 'WAIT'}
                         </button>
                       </td>
                     </tr>
@@ -281,7 +286,7 @@ export default function Dashboard() {
             </Link>
           </div>
 
-          {agents.length === 0 ? (
+          {safeAgents.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               <Users className="w-12 h-12 mx-auto mb-3 opacity-20" />
               <p className="font-mono text-xs">Нет подключенных агентов</p>
@@ -291,16 +296,18 @@ export default function Dashboard() {
             </div>
           ) : (
             <div className="p-4 space-y-3">
-              {agents.slice(0, 4).map(agent => (
-                <div key={agent.id} className="border-2 border-border p-3 hover:border-primary transition-colors bg-background">
+              {safeAgents.slice(0, 4).map((agent, idx) => (
+                <div key={agent?.id || idx} className="border-2 border-border p-3 hover:border-primary transition-colors bg-background">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-primary flex items-center justify-center">
                         <Users className="w-4 h-4 text-primary-foreground" />
                       </div>
                       <div>
-                        <h4 className="font-mono text-xs text-foreground font-medium">{agent.name}</h4>
-                        <p className="font-mono text-[10px] text-muted-foreground">ID: {agent.agentId?.slice(0, 8)}...</p>
+                        <h4 className="font-mono text-xs text-foreground font-medium">{agent?.name || 'Без названия'}</h4>
+                        <p className="font-mono text-[10px] text-muted-foreground">
+                          ID: {agent?.agentId ? agent.agentId.slice(0, 8) + '...' : 'N/A'}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
