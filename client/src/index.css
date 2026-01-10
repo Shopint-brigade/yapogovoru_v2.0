@@ -1,105 +1,692 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Minimalist, Premium Palette - Deep Navy & Vibrant Blue Accent */
-  --background: 220 30% 98%;
-  --foreground: 222 47% 11%;
-  
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
- 
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
- 
-  --primary: 221 83% 53%; /* Vivid Blue */
-  --primary-foreground: 210 40% 98%;
- 
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222 47% 11.2%;
- 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215 16% 47%;
- 
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222 47% 11.2%;
- 
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  /* ========================================
+     PIXEL ART DESIGN SYSTEM - YaPogovoru v2.0
+     ======================================== */
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-  --ring: 221 83% 53%;
- 
-  --radius: 0.75rem;
-  
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
-}
- 
-.dark {
-  --background: 222 47% 11%;
-  --foreground: 210 40% 98%;
- 
-  --card: 222 47% 13%;
-  --card-foreground: 210 40% 98%;
- 
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
- 
-  --primary: 217 91% 60%;
-  --primary-foreground: 222 47% 11%;
- 
-  --secondary: 217 32% 17%;
-  --secondary-foreground: 210 40% 98%;
- 
-  --muted: 217 32% 17%;
-  --muted-foreground: 215 20.2% 65.1%;
- 
-  --accent: 217 32% 17%;
-  --accent-foreground: 210 40% 98%;
- 
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
- 
-  --border: 217 32% 17%;
-  --input: 217 32% 17%;
-  --ring: 224 76% 48%;
+  /* === Base Colors === */
+  --background: 8 10% 5%; /* #0D0C0C - Deep black */
+  --background-darker: 0 0% 3%; /* Even darker for depth */
+  --foreground: 0 0% 100%; /* #FFFFFF */
+
+  /* === Primary - Crimson Red Accent === */
+  --primary: 355 95% 43%; /* #D4031C */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: 355 95% 38%; /* Darker on hover */
+  --primary-glow: 355 95% 43% / 0.4;
+
+  /* === Secondary - Pure White === */
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 8 10% 5%;
+
+  /* === Accent - Subtle White Overlay === */
+  --accent: 0 0% 100% / 0.05;
+  --accent-foreground: 0 0% 100%;
+  --accent-hover: 0 0% 100% / 0.1;
+
+  /* === Muted - Low Emphasis === */
+  --muted: 0 0% 100% / 0.08;
+  --muted-foreground: 0 0% 100% / 0.5;
+
+  /* === Border & Input === */
+  --border: 0 0% 100% / 0.12;
+  --border-hover: 0 0% 100% / 0.25;
+  --input: 0 0% 100% / 0.08;
+  --ring: 142 81% 36%;
+
+  /* === Cards & Popovers === */
+  --card: 8 10% 7%;
+  --card-foreground: 0 0% 100%;
+  --card-hover: 8 10% 9%;
+
+  --popover: 8 10% 6%;
+  --popover-foreground: 0 0% 100%;
+
+  /* === Functional Colors === */
+  --destructive: 3 100% 41%; /* #D10B00 */
+  --destructive-foreground: 0 0% 100%;
+
+  --success: 142 81% 36%; /* #00B74F */
+  --success-light: 145 100% 87%;
+  --success-glow: 142 81% 36% / 0.3;
+
+  --warning: 38 100% 62%; /* #FFC138 */
+  --warning-light: 40 100% 88%;
+  --warning-glow: 38 100% 62% / 0.3;
+
+  --info: 223 100% 61%; /* #3860FF */
+  --info-light: 229 100% 88%;
+  --info-glow: 223 100% 61% / 0.3;
+
+  --error: 3 100% 41%; /* #D10B00 */
+  --error-light: 1 100% 88%;
+  --error-glow: 3 100% 41% / 0.3;
+
+  /* === Disabled States === */
+  --disabled-background: 0 0% 100% / 0.08;
+  --disabled-foreground: 0 0% 100% / 0.35;
+  --disabled-border: 0 0% 100% / 0.1;
+
+  /* === Border Radius - Pixel Art Sharp === */
+  --radius: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 0px;
+
+  /* === Font Families === */
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'JetBrains Mono', monospace;
+  --font-display: 'Press Start 2P', cursive;
+
+  /* === Pixel Grid Spacing (4px base) === */
+  --pixel-1: 4px;
+  --pixel-2: 8px;
+  --pixel-3: 12px;
+  --pixel-4: 16px;
+  --pixel-5: 20px;
+  --pixel-6: 24px;
+  --pixel-8: 32px;
+  --pixel-10: 40px;
+  --pixel-12: 48px;
+
+  /* === Shadows === */
+  --shadow-pixel: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  --shadow-pixel-sm: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  --shadow-pixel-lg: 6px 6px 0px rgba(0, 0, 0, 0.8);
+  --shadow-glow-red: 0 0 20px hsl(355 95% 43% / 0.4);
+  --shadow-glow-green: 0 0 20px hsl(142 81% 36% / 0.4);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* ========================================
+   BASE LAYER STYLES
+   ======================================== */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 4px 4px;
   }
+
+  /* === Pixel Font Headings === */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    @apply font-bold tracking-tight;
+    font-family: var(--font-pixel);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  h4, h5, h6 {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* === Monospace Body Text === */
+  p, span, div, a, button, input, textarea, select, label {
+    font-family: var(--font-mono);
+    line-height: 1.5;
+  }
+
+  /* === Pixel Perfect Rendering === */
+  img, svg {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  /* === Selection Styling === */
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* === Focus Visible === */
+  :focus-visible {
+    outline: 2px solid hsl(var(--success));
+    outline-offset: 2px;
   }
 }
 
-/* Custom Scrollbar */
+/* ========================================
+   CUSTOM SCROLLBAR - PIXEL ART STYLE
+   ======================================== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/20 rounded-full;
-}
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/40;
+  width: 12px;
+  height: 12px;
 }
 
-/* Glass effect utility */
-.glass {
-  @apply bg-background/80 backdrop-blur-md border border-white/20 shadow-sm;
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+  border-left: 2px solid hsl(var(--border));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border: 2px solid hsl(var(--border));
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+}
+
+::-webkit-scrollbar-corner {
+  background: hsl(var(--background));
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) hsl(var(--background));
+}
+
+/* ========================================
+   COMPONENT LAYER STYLES
+   ======================================== */
+@layer components {
+  /* === Pixel Border Effect === */
+  .pixel-border {
+    border: 2px solid hsl(var(--border));
+    box-shadow:
+      inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+      inset 2px 2px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .pixel-border-thick {
+    border: 3px solid hsl(var(--border));
+    box-shadow:
+      inset -3px -3px 0 rgba(0, 0, 0, 0.3),
+      inset 3px 3px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* === Pixel Button Base === */
+  .pixel-btn {
+    position: relative;
+    border: 2px solid currentColor;
+    background: transparent;
+    transition: all 0.1s ease;
+  }
+
+  .pixel-btn::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid currentColor;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  .pixel-btn:hover::before {
+    opacity: 0.5;
+  }
+
+  /* === Pixel Card === */
+  .pixel-card {
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    position: relative;
+  }
+
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+    pointer-events: none;
+  }
+
+  .pixel-card:hover::before {
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* === Pixel Input === */
+  .pixel-input {
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--border));
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+    transition: all 0.15s ease;
+  }
+
+  .pixel-input:focus {
+    border-color: hsl(var(--success));
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.4),
+      0 0 0 2px hsl(var(--success) / 0.2);
+  }
+
+  /* === Pixel Progress Bar === */
+  .pixel-progress {
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--border));
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  .pixel-progress-bar {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary)) 25%,
+      transparent 25%,
+      transparent 50%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--primary)) 75%,
+      transparent 75%,
+      transparent 100%
+    );
+    background-size: 8px 100%;
+    animation: pixel-progress-animate 0.5s linear infinite;
+  }
+
+  @keyframes pixel-progress-animate {
+    from { background-position: 0 0; }
+    to { background-position: 8px 0; }
+  }
+
+  /* === Scanline Effect === */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  /* === CRT Glow Effect === */
+  .crt-glow {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+
+  /* === Pixel Divider === */
+  .pixel-divider {
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--border)) 10%,
+      hsl(var(--border)) 90%,
+      transparent 100%
+    );
+  }
+
+  .pixel-divider-dots {
+    height: 4px;
+    background-image: radial-gradient(
+      circle,
+      hsl(var(--border)) 1px,
+      transparent 1px
+    );
+    background-size: 8px 4px;
+  }
+
+  /* === Status Indicators === */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border: 2px solid currentColor;
+    position: relative;
+  }
+
+  .status-dot::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: currentColor;
+  }
+
+  .status-online {
+    color: hsl(var(--success));
+    box-shadow: 0 0 8px hsl(var(--success) / 0.5);
+  }
+
+  .status-offline {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .status-busy {
+    color: hsl(var(--error));
+    box-shadow: 0 0 8px hsl(var(--error) / 0.5);
+  }
+
+  .status-away {
+    color: hsl(var(--warning));
+    box-shadow: 0 0 8px hsl(var(--warning) / 0.5);
+  }
+}
+
+/* ========================================
+   UTILITY LAYER STYLES
+   ======================================== */
+@layer utilities {
+  /* === Font Utilities === */
+  .font-pixel-xl {
+    font-family: var(--font-pixel);
+    font-size: 24px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .font-pixel-lg {
+    font-family: var(--font-pixel);
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .font-pixel-md {
+    font-family: var(--font-pixel);
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .font-pixel-sm {
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .font-pixel-xs {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .font-mono-lg {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .font-mono-md {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .font-mono-sm {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .font-mono-xs {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* === Text Color Utilities === */
+  .text-muted {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .text-muted-75 {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .text-primary-glow {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  .text-success-glow {
+    color: hsl(var(--success));
+    text-shadow: 0 0 10px hsl(var(--success) / 0.5);
+  }
+
+  /* === Background Utilities === */
+  .bg-pixel-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  .bg-pixel-dots {
+    background-image: radial-gradient(
+      circle at 2px 2px,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+    background-size: 8px 8px;
+  }
+
+  /* === Border Utilities === */
+  .border-pixel {
+    border: 2px solid hsl(var(--border));
+  }
+
+  .border-pixel-thick {
+    border: 3px solid hsl(var(--border));
+  }
+
+  .border-glow-red {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+  }
+
+  .border-glow-green {
+    border-color: hsl(var(--success));
+    box-shadow: 0 0 10px hsl(var(--success) / 0.3);
+  }
+
+  /* === Shadow Utilities === */
+  .shadow-pixel {
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-pixel-sm {
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-pixel-lg {
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-inset-dark {
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* === Animation Utilities === */
+  .animate-pixel-blink {
+    animation: pixel-blink 1s step-end infinite;
+  }
+
+  @keyframes pixel-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .animate-pixel-pulse {
+    animation: pixel-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pixel-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 8px hsl(var(--primary) / 0);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+    }
+    to {
+      box-shadow: 0 0 15px hsl(var(--primary) / 0.5);
+    }
+  }
+
+  /* === Hover Effect Utilities === */
+  .hover-pixel-lift {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .hover-pixel-lift:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .hover-pixel-press:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+
+  .hover-border-glow {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-border-glow:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
+  }
+
+  /* === Retro Badge Corner Effects === */
+  .pixel-corners {
+    position: relative;
+  }
+
+  .pixel-corners::before,
+  .pixel-corners::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--primary));
+  }
+
+  .pixel-corners::before {
+    top: -2px;
+    left: -2px;
+  }
+
+  .pixel-corners::after {
+    bottom: -2px;
+    right: -2px;
+  }
+}
+
+/* ========================================
+   ANIMATION KEYFRAMES
+   ======================================== */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  95% { opacity: 0.9; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .scanlines::after {
+    display: none;
+  }
 }
