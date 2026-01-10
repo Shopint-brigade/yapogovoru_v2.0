@@ -69,30 +69,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Top Header Bar */}
       <header className="h-14 bg-card border-b-2 border-border flex items-center px-4 gap-4 sticky top-0 z-50">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div className="w-6 h-6 bg-primary flex items-center justify-center">
-            <span className="font-pixel text-[8px] text-primary-foreground">N</span>
+            <span className="font-pixel text-[8px] text-primary-foreground">Y</span>
           </div>
-          <span className="font-pixel text-[10px] text-foreground hidden sm:inline">
-            NART
-          </span>
+          <div className="flex flex-col">
+            <span className="font-pixel text-[11px] text-foreground leading-none">
+              YAPOGOVORU
+            </span>
+            <span className="font-mono text-[7px] text-muted-foreground leading-none mt-0.5">
+              by nart automates
+            </span>
+          </div>
         </div>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1 ml-4">
           <TopNavLink href="/">Главная</TopNavLink>
           <TopNavLink href="/agents">Агенты</TopNavLink>
           <TopNavLink href="/batches">Пакеты</TopNavLink>
         </nav>
-
-        {/* Search Bar */}
-        <div className="flex-1 max-w-md mx-auto relative hidden sm:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input
-            placeholder="Поиск..."
-            className="h-8 pl-9 pr-3 text-xs border-border bg-background"
-          />
-        </div>
 
         {/* Right Icons */}
         <div className="flex items-center gap-2 ml-auto">
