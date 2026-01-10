@@ -1,251 +1,692 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Pixel Art Design System - YaPogovoru v2.0 */
-  /* Base Colors */
-  --background: 8 10% 5%; /* #0D0C0C */
+  /* ========================================
+     PIXEL ART DESIGN SYSTEM - YaPogovoru v2.0
+     ======================================== */
+
+  /* === Base Colors === */
+  --background: 8 10% 5%; /* #0D0C0C - Deep black */
+  --background-darker: 0 0% 3%; /* Even darker for depth */
   --foreground: 0 0% 100%; /* #FFFFFF */
 
-  /* Primary - Red Accent */
+  /* === Primary - Crimson Red Accent === */
   --primary: 355 95% 43%; /* #D4031C */
-  --primary-foreground: 0 0% 100%; /* #FFFFFF */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: 355 95% 38%; /* Darker on hover */
+  --primary-glow: 355 95% 43% / 0.4;
 
-  /* Secondary - White */
-  --secondary: 0 0% 100%; /* #FFFFFF */
-  --secondary-foreground: 8 10% 5%; /* #0D0C0C */
+  /* === Secondary - Pure White === */
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 8 10% 5%;
 
-  /* Accent - Subtle Highlight */
-  --accent: 0 0% 100% / 0.05; /* rgba(255,255,255,0.05) */
-  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  /* === Accent - Subtle White Overlay === */
+  --accent: 0 0% 100% / 0.05;
+  --accent-foreground: 0 0% 100%;
+  --accent-hover: 0 0% 100% / 0.1;
 
-  /* Muted - For less emphasis */
-  --muted: 0 0% 100% / 0.15; /* rgba(255,255,255,0.15) */
-  --muted-foreground: 0 0% 100% / 0.5; /* rgba(255,255,255,0.5) */
+  /* === Muted - Low Emphasis === */
+  --muted: 0 0% 100% / 0.08;
+  --muted-foreground: 0 0% 100% / 0.5;
 
-  /* Border & Input */
-  --border: 0 0% 100% / 0.15; /* rgba(255,255,255,0.15) */
-  --input: 0 0% 100%; /* #FFFFFF */
-  --ring: 142 81% 36%; /* Success green for focus */
+  /* === Border & Input === */
+  --border: 0 0% 100% / 0.12;
+  --border-hover: 0 0% 100% / 0.25;
+  --input: 0 0% 100% / 0.08;
+  --ring: 142 81% 36%;
 
-  /* Cards & Popovers */
-  --card: 8 10% 8%; /* Slightly lighter than bg */
+  /* === Cards & Popovers === */
+  --card: 8 10% 7%;
   --card-foreground: 0 0% 100%;
+  --card-hover: 8 10% 9%;
 
-  --popover: 8 10% 5%;
+  --popover: 8 10% 6%;
   --popover-foreground: 0 0% 100%;
 
-  /* Destructive/Error */
+  /* === Functional Colors === */
   --destructive: 3 100% 41%; /* #D10B00 */
   --destructive-foreground: 0 0% 100%;
 
-  /* Success */
   --success: 142 81% 36%; /* #00B74F */
-  --success-light: 145 100% 87%; /* #BFFFDB */
+  --success-light: 145 100% 87%;
+  --success-glow: 142 81% 36% / 0.3;
 
-  /* Warning */
   --warning: 38 100% 62%; /* #FFC138 */
-  --warning-light: 40 100% 88%; /* #FFECC2 */
+  --warning-light: 40 100% 88%;
+  --warning-glow: 38 100% 62% / 0.3;
 
-  /* Info */
   --info: 223 100% 61%; /* #3860FF */
-  --info-light: 229 100% 88%; /* #C2CEFF */
+  --info-light: 229 100% 88%;
+  --info-glow: 223 100% 61% / 0.3;
 
-  /* Error (same as destructive) */
   --error: 3 100% 41%; /* #D10B00 */
-  --error-light: 1 100% 88%; /* #FFC5C2 */
+  --error-light: 1 100% 88%;
+  --error-glow: 3 100% 41% / 0.3;
 
-  /* Disabled States */
-  --disabled-background: 0 0% 100% / 0.15;
-  --disabled-foreground: 0 0% 100% / 0.5;
-  --disabled-border: 0 0% 100% / 0.15;
+  /* === Disabled States === */
+  --disabled-background: 0 0% 100% / 0.08;
+  --disabled-foreground: 0 0% 100% / 0.35;
+  --disabled-border: 0 0% 100% / 0.1;
 
-  /* Border Radius - Pixel Art (Sharp Corners) */
+  /* === Border Radius - Pixel Art Sharp === */
   --radius: 0px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 0px;
 
-  /* Font Families */
+  /* === Font Families === */
   --font-pixel: 'Press Start 2P', cursive;
   --font-mono: 'JetBrains Mono', monospace;
   --font-sans: 'JetBrains Mono', monospace;
   --font-display: 'Press Start 2P', cursive;
 
-  /* Spacing (4px base unit) */
-  --spacing-xxs: 2px;
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-xl: 20px;
-  --spacing-xxl: 24px;
+  /* === Pixel Grid Spacing (4px base) === */
+  --pixel-1: 4px;
+  --pixel-2: 8px;
+  --pixel-3: 12px;
+  --pixel-4: 16px;
+  --pixel-5: 20px;
+  --pixel-6: 24px;
+  --pixel-8: 32px;
+  --pixel-10: 40px;
+  --pixel-12: 48px;
 
-  /* Padding */
-  --padding-xxs: 2px;
-  --padding-xs: 4px;
-  --padding-sm: 8px;
-  --padding-md: 16px;
-  --padding-xl: 20px;
-  --padding-xxl: 24px;
+  /* === Shadows === */
+  --shadow-pixel: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  --shadow-pixel-sm: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  --shadow-pixel-lg: 6px 6px 0px rgba(0, 0, 0, 0.8);
+  --shadow-glow-red: 0 0 20px hsl(355 95% 43% / 0.4);
+  --shadow-glow-green: 0 0 20px hsl(142 81% 36% / 0.4);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* ========================================
+   BASE LAYER STYLES
+   ======================================== */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-mono);
     font-size: 14px;
-    line-height: 1;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 4px 4px;
   }
 
-  /* Pixel font for headings */
+  /* === Pixel Font Headings === */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-pixel);
     font-weight: 400;
-    letter-spacing: 1px;
-    line-height: 1;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    text-transform: uppercase;
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 24px;
+    line-height: 1.6;
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 18px;
+    line-height: 1.5;
   }
 
   h3 {
-    font-size: 24px;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   h4, h5, h6 {
-    font-size: 14px;
+    font-size: 11px;
+    line-height: 1.5;
   }
 
-  /* Monospace for paragraphs and body text */
-  p, span, div, a, button, input, textarea, select {
+  /* === Monospace Body Text === */
+  p, span, div, a, button, input, textarea, select, label {
     font-family: var(--font-mono);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
-  /* Pixel perfect rendering */
-  * {
+  /* === Pixel Perfect Rendering === */
+  img, svg {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
   }
+
+  /* === Selection Styling === */
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* === Focus Visible === */
+  :focus-visible {
+    outline: 2px solid hsl(var(--success));
+    outline-offset: 2px;
+  }
 }
 
-/* Custom Scrollbar - Pixel Art Style */
+/* ========================================
+   CUSTOM SCROLLBAR - PIXEL ART STYLE
+   ======================================== */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: hsl(var(--background));
+  border-left: 2px solid hsl(var(--border));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border: 2px solid hsl(var(--border));
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
 }
 
-/* Pixel Art Utility Classes */
+::-webkit-scrollbar-corner {
+  background: hsl(var(--background));
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) hsl(var(--background));
+}
+
+/* ========================================
+   COMPONENT LAYER STYLES
+   ======================================== */
+@layer components {
+  /* === Pixel Border Effect === */
+  .pixel-border {
+    border: 2px solid hsl(var(--border));
+    box-shadow:
+      inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+      inset 2px 2px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .pixel-border-thick {
+    border: 3px solid hsl(var(--border));
+    box-shadow:
+      inset -3px -3px 0 rgba(0, 0, 0, 0.3),
+      inset 3px 3px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* === Pixel Button Base === */
+  .pixel-btn {
+    position: relative;
+    border: 2px solid currentColor;
+    background: transparent;
+    transition: all 0.1s ease;
+  }
+
+  .pixel-btn::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid currentColor;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  .pixel-btn:hover::before {
+    opacity: 0.5;
+  }
+
+  /* === Pixel Card === */
+  .pixel-card {
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    position: relative;
+  }
+
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+    pointer-events: none;
+  }
+
+  .pixel-card:hover::before {
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* === Pixel Input === */
+  .pixel-input {
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--border));
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+    transition: all 0.15s ease;
+  }
+
+  .pixel-input:focus {
+    border-color: hsl(var(--success));
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.4),
+      0 0 0 2px hsl(var(--success) / 0.2);
+  }
+
+  /* === Pixel Progress Bar === */
+  .pixel-progress {
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--border));
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  .pixel-progress-bar {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary)) 25%,
+      transparent 25%,
+      transparent 50%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--primary)) 75%,
+      transparent 75%,
+      transparent 100%
+    );
+    background-size: 8px 100%;
+    animation: pixel-progress-animate 0.5s linear infinite;
+  }
+
+  @keyframes pixel-progress-animate {
+    from { background-position: 0 0; }
+    to { background-position: 8px 0; }
+  }
+
+  /* === Scanline Effect === */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  /* === CRT Glow Effect === */
+  .crt-glow {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+
+  /* === Pixel Divider === */
+  .pixel-divider {
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--border)) 10%,
+      hsl(var(--border)) 90%,
+      transparent 100%
+    );
+  }
+
+  .pixel-divider-dots {
+    height: 4px;
+    background-image: radial-gradient(
+      circle,
+      hsl(var(--border)) 1px,
+      transparent 1px
+    );
+    background-size: 8px 4px;
+  }
+
+  /* === Status Indicators === */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border: 2px solid currentColor;
+    position: relative;
+  }
+
+  .status-dot::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: currentColor;
+  }
+
+  .status-online {
+    color: hsl(var(--success));
+    box-shadow: 0 0 8px hsl(var(--success) / 0.5);
+  }
+
+  .status-offline {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .status-busy {
+    color: hsl(var(--error));
+    box-shadow: 0 0 8px hsl(var(--error) / 0.5);
+  }
+
+  .status-away {
+    color: hsl(var(--warning));
+    box-shadow: 0 0 8px hsl(var(--warning) / 0.5);
+  }
+}
+
+/* ========================================
+   UTILITY LAYER STYLES
+   ======================================== */
 @layer utilities {
-  /* Font utilities */
+  /* === Font Utilities === */
   .font-pixel-xl {
     font-family: var(--font-pixel);
-    font-size: 40px;
-    line-height: 1;
-    letter-spacing: 1px;
+    font-size: 24px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
     font-weight: 400;
+    text-transform: uppercase;
   }
 
   .font-pixel-lg {
     font-family: var(--font-pixel);
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: 1px;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
     font-weight: 400;
+    text-transform: uppercase;
   }
 
   .font-pixel-md {
     font-family: var(--font-pixel);
-    font-size: 14px;
-    line-height: 1;
-    letter-spacing: 1px;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
     font-weight: 400;
+    text-transform: uppercase;
   }
 
   .font-pixel-sm {
     font-family: var(--font-pixel);
-    font-size: 12px;
-    line-height: 1;
-    letter-spacing: 1px;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
     font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .font-pixel-xs {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: uppercase;
   }
 
   .font-mono-lg {
     font-family: var(--font-mono);
     font-size: 16px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 400;
   }
 
   .font-mono-md {
     font-family: var(--font-mono);
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 400;
   }
 
   .font-mono-sm {
     font-family: var(--font-mono);
     font-size: 12px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 400;
   }
 
   .font-mono-xs {
     font-family: var(--font-mono);
     font-size: 10px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 400;
   }
 
-  /* Text color utilities */
+  /* === Text Color Utilities === */
   .text-muted {
-    color: rgba(255, 255, 255, 0.5);
+    color: hsl(var(--muted-foreground));
   }
 
   .text-muted-75 {
     color: rgba(255, 255, 255, 0.75);
   }
 
-  /* Pixel border effect */
-  .pixel-border {
-    border: 1px solid rgba(255, 255, 255, 0.15);
+  .text-primary-glow {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
   }
 
-  .pixel-border-2 {
-    border: 2px solid rgba(255, 255, 255, 0.15);
+  .text-success-glow {
+    color: hsl(var(--success));
+    text-shadow: 0 0 10px hsl(var(--success) / 0.5);
   }
 
-  /* Sharp corners (default for pixel art) */
-  .sharp {
-    border-radius: 0px;
+  /* === Background Utilities === */
+  .bg-pixel-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  .bg-pixel-dots {
+    background-image: radial-gradient(
+      circle at 2px 2px,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+    background-size: 8px 8px;
+  }
+
+  /* === Border Utilities === */
+  .border-pixel {
+    border: 2px solid hsl(var(--border));
+  }
+
+  .border-pixel-thick {
+    border: 3px solid hsl(var(--border));
+  }
+
+  .border-glow-red {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+  }
+
+  .border-glow-green {
+    border-color: hsl(var(--success));
+    box-shadow: 0 0 10px hsl(var(--success) / 0.3);
+  }
+
+  /* === Shadow Utilities === */
+  .shadow-pixel {
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-pixel-sm {
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-pixel-lg {
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-inset-dark {
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* === Animation Utilities === */
+  .animate-pixel-blink {
+    animation: pixel-blink 1s step-end infinite;
+  }
+
+  @keyframes pixel-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .animate-pixel-pulse {
+    animation: pixel-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pixel-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 8px hsl(var(--primary) / 0);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+    }
+    to {
+      box-shadow: 0 0 15px hsl(var(--primary) / 0.5);
+    }
+  }
+
+  /* === Hover Effect Utilities === */
+  .hover-pixel-lift {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .hover-pixel-lift:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .hover-pixel-press:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+
+  .hover-border-glow {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-border-glow:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
+  }
+
+  /* === Retro Badge Corner Effects === */
+  .pixel-corners {
+    position: relative;
+  }
+
+  .pixel-corners::before,
+  .pixel-corners::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--primary));
+  }
+
+  .pixel-corners::before {
+    top: -2px;
+    left: -2px;
+  }
+
+  .pixel-corners::after {
+    bottom: -2px;
+    right: -2px;
+  }
+}
+
+/* ========================================
+   ANIMATION KEYFRAMES
+   ======================================== */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  95% { opacity: 0.9; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .scanlines::after {
+    display: none;
   }
 }

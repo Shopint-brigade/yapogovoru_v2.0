@@ -9,7 +9,20 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SwitchPrimitives.Root
     className={cn(
-      "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+      // Base pixel switch styling
+      "peer inline-flex h-6 w-12 shrink-0 cursor-pointer items-center",
+      // Pixel border
+      "border-2 border-border",
+      // Background and shadow
+      "bg-background shadow-[inset_2px_2px_4px_rgba(0,0,0,0.4)]",
+      // Transitions
+      "transition-all duration-100",
+      // Focus state
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+      // Disabled state
+      "disabled:cursor-not-allowed disabled:opacity-40",
+      // Checked state - primary red with glow
+      "data-[state=checked]:bg-primary/20 data-[state=checked]:border-primary data-[state=checked]:shadow-[inset_2px_2px_4px_rgba(0,0,0,0.2),0_0_10px_hsl(var(--primary)/0.3)]",
       className
     )}
     {...props}
@@ -17,7 +30,15 @@ const Switch = React.forwardRef<
   >
     <SwitchPrimitives.Thumb
       className={cn(
-        "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+        // Pixel thumb styling
+        "pointer-events-none block h-4 w-4 bg-foreground/50",
+        // Pixel shadow effect
+        "shadow-pixel-sm",
+        // Transition
+        "transition-transform duration-100",
+        // Position
+        "data-[state=unchecked]:translate-x-0.5",
+        "data-[state=checked]:translate-x-[26px] data-[state=checked]:bg-primary data-[state=checked]:shadow-[0_0_8px_hsl(var(--primary)/0.5),2px_2px_0px_rgba(0,0,0,0.8)]"
       )}
     />
   </SwitchPrimitives.Root>

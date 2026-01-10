@@ -1,6 +1,5 @@
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
-import { Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -10,7 +9,7 @@ const RadioGroup = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
-      className={cn("grid gap-2", className)}
+      className={cn("grid gap-3", className)}
       {...props}
       ref={ref}
     />
@@ -26,13 +25,28 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        // Base pixel radio styling - square instead of round for pixel art
+        "peer h-6 w-6 shrink-0 bg-background",
+        // Pixel border with inset shadow
+        "border-2 border-border",
+        "shadow-[inset_1px_1px_2px_rgba(0,0,0,0.4)]",
+        // Transitions
+        "transition-all duration-100",
+        // Focus state
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        // Hover state
+        "hover:border-foreground/50",
+        // Disabled state
+        "disabled:cursor-not-allowed disabled:opacity-40",
+        // Checked state
+        "data-[state=checked]:border-primary data-[state=checked]:shadow-[0_0_10px_hsl(var(--primary)/0.3)]",
         className
       )}
       {...props}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <Circle className="h-2.5 w-2.5 fill-current text-current" />
+        {/* Pixel-style filled indicator */}
+        <div className="h-3 w-3 bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )
